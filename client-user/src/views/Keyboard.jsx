@@ -1,0 +1,46 @@
+import { useEffect, useState } from "react";
+import KeyboardCard from '../components/KeyboardCard'
+import { useDispatch, useSelector } from "react-redux";
+import { fetchKeyboard } from "../store/action/actionCreator";
+
+export default function Keyboard() {
+  
+  const {keyboard} = useSelector((state)=> {
+    return state.reducerKeyboards
+  });
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchKeyboard())
+  }, []);
+  return (
+    <>
+      <div
+        className="bg-cover bg-center h-flex"
+        style={{
+          backgroundImage:
+            "url('data:image/jpeg;base64,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')",
+          backgroundSize: "30%", // or use "contain",
+          backgroundPosition: "center",
+        }}
+      >
+        <h5
+          className="text-white text-lg font-medium text-center"
+          style={{ fontFamily: "Roboto, sans-serif" }}
+        >
+          Rexus Gaming Keyboard is designed perfectly to facilitate your gaming
+          needs. A variety features of gaming keyboard choices you can choose
+          from, from LED RGB, the one with software, waterproof, and practical
+          size keyboard, with technology we have been developing continuously.
+          With Rexus Gaming Keyboard, we hope that we can provide the best
+          comfort and the best gaming experience, boosting your performance to
+          become a CHAMPION!
+        </h5>
+      </div>
+      <div className="flex flex-wrap justify-center">
+        {keyboard.map((keyboard, index) => {
+          return  <KeyboardCard key={index} props={keyboard}/>
+        })}
+      </div>
+    </>
+  );
+}
